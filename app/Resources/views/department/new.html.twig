@@ -1,0 +1,14 @@
+{% extends 'secure.html.twig' %}
+
+{% block pageTitle %}
+    Add New Department
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="col-sm-offset-2 col-sm-4">
+            <input type="submit" value="Add Department" class="btn btn-success" />
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

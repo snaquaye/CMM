@@ -1,0 +1,14 @@
+{% extends 'secure.html.twig' %}
+
+{% block pageTitle %}
+    Edit {{ department.departmentName }}
+{% endblock %}
+
+{% block content %}
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <div class="col-sm-offset-2 col-sm-4">
+            <input type="submit" value="Edit" class="btn btn-success" />
+        </div>
+    {{ form_end(edit_form) }}
+{% endblock %}
