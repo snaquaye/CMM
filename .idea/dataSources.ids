@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - membership@localhost" uuid="40d9544e-130d-4ab1-b397-f71e1341fb76">
+    <database-info product="MySQL" version="5.6.25-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="membership"/>
+    <table name="department" schema="" catalog="membership" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="departmentName" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_8157AA0FAE80F5DF" table="profile" schema="" catalog="membership" columns="department_id"/>
+      <index name="UNIQ_CD1DE18ACE6CEFE1" unique="true" columns="departmentName"/>
+    </table>
+    <table name="profile" schema="" catalog="membership" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="department_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="dateOfRegistration" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="dateOfBirth" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="maritalStatus" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="gender" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="address" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="phone" sqlType="VARCHAR" precision="11" scale="0" nullable="false" jdbcType="12"/>
+      <column name="isQualified" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="state" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="annualIncome" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="netWorth" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="creditRating" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_8157AA0FA76ED395" columns="user_id" ref-table="user" ref-schema="" ref-catalog="membership" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_8157AA0FAE80F5DF" columns="department_id" ref-table="department" ref-schema="" ref-catalog="membership" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="UNIQ_8157AA0FA76ED395" unique="true" columns="user_id"/>
+      <index name="IDX_8157AA0FAE80F5DF" unique="false" columns="department_id"/>
+    </table>
+    <table name="user" schema="" catalog="membership" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="username" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="roles" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="salt" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="first_name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="other_name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_8157AA0FA76ED395" table="profile" schema="" catalog="membership" columns="user_id"/>
+    </table>
+  </data-source>
+</component>

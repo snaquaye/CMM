@@ -1,0 +1,51 @@
+{% extends 'secure.html.twig' %}
+
+{% block pageTitle %}
+    Departments
+{% endblock %}
+
+{% block content %}
+    {% if departments %}
+        <div class="row">
+            <div class="col-md-4 pull-right">
+                <a href="{{ path('department_new') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add Department</a>
+            </div>
+        </div>
+        <table class="table table-stripped hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Departmentname</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for department in departments %}
+                <tr>
+                    <td><a href="{{ path('department_show', { 'id': department.id }) }}">{{ department.id }}</a></td>
+                    <td>{{ department.departmentName }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('department_edit', { 'id': department.id }) }}" class="btn btn-primary">Edit</a>
+                            </li>
+
+                            <li>
+                                <form action="{{ path('department_delete', {'id': department.id}) }}" method="delete">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                </form>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">
+            <p>
+                No departments have been added. <a href="{{ path('department_new') }}">Click here to add new department</a>
+            </p>
+        </div>
+    {% endif %}
+{% endblock %}

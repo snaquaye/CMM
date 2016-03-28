@@ -1,0 +1,5 @@
+[24-Mar-2016 08:54:55 UTC] PHP Fatal error:  Access level to AppBundle\Entity\User::$id must be protected (as in class FOS\UserBundle\Model\User) or weaker in C:\wampq\www\membership\src\AppBundle\Entity\User.php on line 20
+[24-Mar-2016 08:55:01 UTC] PHP Fatal error:  Access level to AppBundle\Entity\User::$id must be protected (as in class FOS\UserBundle\Model\User) or weaker in C:\wampq\www\membership\src\AppBundle\Entity\User.php on line 20
+[24-Mar-2016 08:55:03 UTC] PHP Fatal error:  Access level to AppBundle\Entity\User::$id must be protected (as in class FOS\UserBundle\Model\User) or weaker in C:\wampq\www\membership\src\AppBundle\Entity\User.php on line 20
+[28-Mar-2016 15:13:47 UTC] PHP Parse error:  syntax error, unexpected '}' in C:\wampq\www\membership\src\AppBundle\Form\RegistrationType.php on line 23
+[28-Mar-2016 15:13:53 UTC] PHP Parse error:  syntax error, unexpected '}' in C:\wampq\www\membership\src\AppBundle\Form\RegistrationType.php on line 23

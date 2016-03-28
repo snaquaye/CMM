@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>MemberLoan</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ memberLoan.id }}</td>
+            </tr>
+            <tr>
+                <th>Member</th>
+                <td>{{ memberLoan.member }}</td>
+            </tr>
+            <tr>
+                <th>Dateissued</th>
+                <td>{% if memberLoan.dateIssued %}{{ memberLoan.dateIssued|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{{ memberLoan.amount }}</td>
+            </tr>
+            <tr>
+                <th>Interestrate</th>
+                <td>{{ memberLoan.interestRate }}</td>
+            </tr>
+            <tr>
+                <th>Issuedby</th>
+                <td>{{ memberLoan.issuedBy }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('memberloan_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('memberloan_edit', { 'id': memberLoan.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
