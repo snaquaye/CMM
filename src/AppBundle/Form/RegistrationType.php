@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RegistrationType extends AbstractType
 {
@@ -43,5 +44,12 @@ class RegistrationType extends AbstractType
   public function getName()
   {
     return $this->getBlockPrefix();
+  }
+
+  public function configureOptions(OptionsResolver $options)
+  {
+    $options->setDefaults([
+      'data_class' => 'AppBundle\Entity\User'
+    ]);
   }
 }
