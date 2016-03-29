@@ -3,3 +3,8 @@
 [24-Mar-2016 08:55:03 UTC] PHP Fatal error:  Access level to AppBundle\Entity\User::$id must be protected (as in class FOS\UserBundle\Model\User) or weaker in C:\wampq\www\membership\src\AppBundle\Entity\User.php on line 20
 [28-Mar-2016 15:13:47 UTC] PHP Parse error:  syntax error, unexpected '}' in C:\wampq\www\membership\src\AppBundle\Form\RegistrationType.php on line 23
 [28-Mar-2016 15:13:53 UTC] PHP Parse error:  syntax error, unexpected '}' in C:\wampq\www\membership\src\AppBundle\Form\RegistrationType.php on line 23
+[28-Mar-2016 18:48:10 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\wampq\www\membership\vendor\symfony\symfony\src\Symfony\Bridge\Twig\Extension\RoutingExtension.php on line 22
+[28-Mar-2016 20:20:33 UTC] PHP Parse error:  syntax error, unexpected '}' in C:\wampq\www\membership\src\AppBundle\Form\ProfileType.php on line 56
+[28-Mar-2016 20:20:38 UTC] PHP Parse error:  syntax error, unexpected '}' in C:\wampq\www\membership\src\AppBundle\Form\ProfileType.php on line 56
+[29-Mar-2016 01:43:20 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\wampq\www\membership\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Authentication\Token\AnonymousToken.php on line 22
+[29-Mar-2016 02:29:06 UTC] PHP Fatal error:  Call to undefined method AppBundle\Entity\User::getUser() in C:\wampq\www\membership\src\AppBundle\EventListener\FOSRegistrationListener.php on line 57

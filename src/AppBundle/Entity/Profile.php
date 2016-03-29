@@ -26,6 +26,7 @@ class Profile
    * @var int
    *
    * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", inversedBy="profile")
+   * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
    */
   private $user;
 
@@ -81,7 +82,7 @@ class Profile
   /**
    * @var int
    *
-   * @ORM\Column(name="isQualified", type="boolean")
+   * @ORM\Column(name="isQualified", type="boolean", nullable=true)
    */
   private $isQualified;
 
@@ -109,7 +110,7 @@ class Profile
   /**
    * @var int
    *
-   * @ORM\Column(name="creditRating", type="integer")
+   * @ORM\Column(name="creditRating", type="integer", nullable=true)
    */
   private $creditRating;
 
