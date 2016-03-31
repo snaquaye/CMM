@@ -1,5 +1,9 @@
 {% extends 'secure.html.twig' %}
 
-{% block content %}
+{% block pageTitle %}
+    Dashboard
+{% endblock %}
 
+{% block content %}
+    <h3>Welcome {{ app.user.username }}</h3>
 {% endblock %}

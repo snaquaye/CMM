@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 
+use AppBundle\Entity\Profile;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
@@ -31,7 +32,7 @@ class User extends BaseUser
   private $firstName;
 
   /**
-   * @ORM\Column(type="string")
+   * @ORM\Column(type="string", nullable=true)
    */
   private $otherNames;
 
@@ -42,7 +43,7 @@ class User extends BaseUser
 
   /**
    * @var Profile
-   * @ORM\OneToOne(targetEntity="AppBundle\Entity\Profile", mappedBy="user")
+   * @ORM\OneToOne(targetEntity="AppBundle\Entity\Profile", mappedBy="user", cascade={"all"})
    */
   private $profile;
 
@@ -113,13 +114,14 @@ class User extends BaseUser
   /**
    * Set profile
    *
-   * @param \AppBundle\Entity\Profile $profile
+   * @param Profile $profile
    *
    * @return User
    */
-  public function setProfile(\AppBundle\Entity\Profile $profile = null)
+  public function setProfile(Profile $profile = null)
   {
     $this->profile = $profile;
+    $profile->setUser($this);
 
     return $this;
   }
@@ -127,7 +129,7 @@ class User extends BaseUser
   /**
    * Get profile
    *
-   * @return \AppBundle\Entity\Profile
+   * @return Profile
    */
   public function getProfile()
   {

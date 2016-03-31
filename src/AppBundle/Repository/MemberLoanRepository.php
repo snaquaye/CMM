@@ -10,4 +10,21 @@ namespace AppBundle\Repository;
  */
 class MemberLoanRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function findAll($profileId = null)
+  {
+    $qb = $this->createQueryBuilder('l');
+
+    $query = $qb->select('l.id', 'l.amount', 'l.issuedBy', 'l.approvalStatus', 'l.duration', 'l.interestRate', 'l.dateIssued', 'u.firstName', 'u.lastName', 'u.otherNames')
+      ->join('l.profile', 'p')
+      ->join('p.user', 'u');
+
+    if ($profileId) {
+      $query->where('l.profile.id = :profileId')
+        ->setParameter('profileId', $profileId);
+    }
+
+    $stmt = $query->getQuery();
+
+    return $stmt->getArrayResult();
+  }
 }

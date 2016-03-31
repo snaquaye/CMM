@@ -12,3 +12,27 @@ services:
     class: AppBundle\Form\RegistrationType
     tags:
       - {name: form.type, alias: app_user_registration}
+
+#  app.form.profile:
+#  	class: AppBundle\Form\ProfileType
+#  	arguments: ["@security.token_storage"]
+#  	tags:
+#      - {name: form.type, alias: profile_form}
+
+  app.form.profile:
+    class: AppBundle\Form\ProfileType
+    arguments: ['@security.authorization_checker', '@doctrine.orm.entity_manager']
+    tags:
+      - { name: form.type }
+
+  app.event_listener.fosregistration_listener:
+    class: AppBundle\EventListener\FOSRegistrationListener
+    arguments: ['@doctrine.orm.entity_manager', '@fos_user.user_manager']
+    tags:
+      - { name: kernel.event_subscriber }
+
+  profile.form:
+    class: AppBundle\Form\MemberLoanType
+    arguments: ['@security.authorization_checker', '@doctrine.orm.entity_manager']
+    tags:
+        - { name: form.type, alias: loan_form }

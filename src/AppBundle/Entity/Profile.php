@@ -26,6 +26,7 @@ class Profile
    * @var int
    *
    * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", inversedBy="profile")
+   * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
    */
   private $user;
 
@@ -81,7 +82,7 @@ class Profile
   /**
    * @var int
    *
-   * @ORM\Column(name="isQualified", type="boolean")
+   * @ORM\Column(name="isQualified", type="boolean", nullable=true)
    */
   private $isQualified;
 
@@ -109,7 +110,7 @@ class Profile
   /**
    * @var int
    *
-   * @ORM\Column(name="creditRating", type="integer")
+   * @ORM\Column(name="creditRating", type="integer", nullable=true)
    */
   private $creditRating;
 
@@ -126,6 +127,13 @@ class Profile
    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Payment", mappedBy="profile")
    */
   private $payments;
+
+  /**
+   * @var bool
+   *
+   * @ORM\Column(name="status", type="string", nullable=true)
+   */
+  private $status;
 
   /**
    *
@@ -480,27 +488,43 @@ class Profile
     return $this->loans;
   }
 
-    /**
-     * Add loan
-     *
-     * @param \AppBundle\Entity\Loan $loan
-     *
-     * @return Profile
-     */
-    public function addLoan(\AppBundle\Entity\Loan $loan)
-    {
-        $this->loans[] = $loan;
+  /**
+   * Add loan
+   *
+   * @param \AppBundle\Entity\Loan $loan
+   *
+   * @return Profile
+   */
+  public function addLoan(\AppBundle\Entity\Loan $loan)
+  {
+    $this->loans[] = $loan;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    /**
-     * Remove loan
-     *
-     * @param \AppBundle\Entity\Loan $loan
-     */
-    public function removeLoan(\AppBundle\Entity\Loan $loan)
-    {
-        $this->loans->removeElement($loan);
-    }
+  /**
+   * Remove loan
+   *
+   * @param \AppBundle\Entity\Loan $loan
+   */
+  public function removeLoan(\AppBundle\Entity\Loan $loan)
+  {
+    $this->loans->removeElement($loan);
+  }
+
+  /**
+   * @param $status bool
+   */
+  public function setStatus($status)
+  {
+    $this->status = $status;
+  }
+
+  /**
+   * @return bool
+   */
+  public function getStatus()
+  {
+    return $this->status;
+  }
 }

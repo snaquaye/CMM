@@ -28,7 +28,8 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/memberloan/, role: ROLE_USER }
+        - { path: ^/, role: ROLE_USER }
         - { path: ^/payment/, role: ROLE_ADMIN }
-        - { path: ^/profile/, role: ROLE_ADMIN }
+        - { path: ^/profile/, role: ROLE_USER }
         - { path: ^/user/, role: ROLE_ADMIN }
         - { path: ^/department/, role: ROLE_ADMIN }

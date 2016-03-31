@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RegistrationType extends AbstractType
@@ -25,7 +26,7 @@ class RegistrationType extends AbstractType
       ->add('otherNames')
       ->add('username')
       ->add('email', EmailType::class)
-      ->add('password', RepeatedType::class, [
+      ->add('plainPassword', RepeatedType::class, [
         'type' => PasswordType::class,
         'invalid_message' => 'Password confirmation doesn\'t match',
         'options' => array('attr' => array('class' => 'password-field')),
