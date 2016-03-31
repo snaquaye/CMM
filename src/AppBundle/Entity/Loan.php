@@ -33,7 +33,7 @@ class Loan
   /**
    * @var \DateTime
    *
-   * @ORM\Column(name="dateIssued", type="date")
+   * @ORM\Column(name="dateIssued", type="date", nullable=true)
    */
   private $dateIssued;
 
@@ -47,16 +47,23 @@ class Loan
   /**
    * @var string
    *
-   * @ORM\Column(name="interestRate", type="string", length=255)
+   * @ORM\Column(name="interestRate", type="integer", nullable=true)
    */
   private $interestRate;
 
   /**
    * @var string
    *
-   * @ORM\Column(name="issuedBy", type="string", length=255)
+   * @ORM\Column(name="issuedBy", type="integer", nullable=true)
    */
   private $issuedBy;
+
+  /**
+   * @var string
+   *
+   * @ORM\Column(name="approvalStatus", type="string", length=30, nullable=true)
+   */
+  private $approvalStatus;
 
   /**
    * @var ArrayCollection
@@ -64,6 +71,22 @@ class Loan
    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Payment", mappedBy="loan")
    */
   private $payments;
+
+  /**
+   * @var int
+   *
+   * @ORM\Column(name="duration", type="integer", nullable=true)
+   */
+  private $duration;
+
+  /**
+   * Constructor
+   */
+  public function __construct()
+  {
+    $this->payments = new ArrayCollection();
+    $this->setInterestRate(10);
+  }
 
   /**
    * Get id
@@ -194,45 +217,70 @@ class Loan
   {
     return $this->issuedBy;
   }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->payments = new ArrayCollection();
-    }
 
-    /**
-     * Add payment
-     *
-     * @param Payment $payment
-     *
-     * @return Loan
-     */
-    public function addPayment(Payment $payment)
-    {
-        $this->payments[] = $payment;
+  /**
+   * Add payment
+   *
+   * @param Payment $payment
+   *
+   * @return Loan
+   */
+  public function addPayment(Payment $payment)
+  {
+    $this->payments[] = $payment;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    /**
-     * Remove payment
-     *
-     * @param Payment $payment
-     */
-    public function removePayment(Payment $payment)
-    {
-        $this->payments->removeElement($payment);
-    }
+  /**
+   * Remove payment
+   *
+   * @param Payment $payment
+   */
+  public function removePayment(Payment $payment)
+  {
+    $this->payments->removeElement($payment);
+  }
 
-    /**
-     * Get payment
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPayments()
-    {
-        return $this->payments;
-    }
+  /**
+   * Get payment
+   *
+   * @return \Doctrine\Common\Collections\Collection
+   */
+  public function getPayments()
+  {
+    return $this->payments;
+  }
+
+  /**
+   * @return boolean
+   */
+  public function getApprovalStatus()
+  {
+    return $this->approvalStatus;
+  }
+
+  /**
+   * @param boolean $approvalStatus
+   */
+  public function setApprovalStatus($approvalStatus)
+  {
+    $this->approvalStatus = $approvalStatus;
+  }
+
+  /**
+   * @return int
+   */
+  public function getDuration()
+  {
+    return $this->duration;
+  }
+
+  /**
+   * @param int $duration
+   */
+  public function setDuration($duration)
+  {
+    $this->duration = $duration;
+  }
 }

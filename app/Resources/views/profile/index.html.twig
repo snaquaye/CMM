@@ -1,59 +1,55 @@
-{% extends 'base.html.twig' %}
+{% extends 'secure.html.twig' %}
 
-{% block body %}
-    <h1>Profile list</h1>
+{% block pageTitle %}
+    Members
+{% endblock %}
 
-    <table>
-        <thead>
+{% block content %}
+
+    {% if profiles %}
+        <table class="table table-stripped table-bordered">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>Dateofregistration</th>
-                <th>Dateofbirth</th>
-                <th>Maritalstatus</th>
-                <th>Gender</th>
-                <th>Address</th>
+                <th>Member's Name</th>
+                <th>Annual Income (NGN)</th>
+                <th>Credit Rating</th>
+                <th>Net Worth (NGN)</th>
+                <th>Is Qualified</th>
                 <th>Phone</th>
-                <th>Isqualified</th>
-                <th>State</th>
-                <th>Annualincome</th>
-                <th>Networth</th>
-                <th>Creditrating</th>
                 <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for profile in profiles %}
-            <tr>
-                <td><a href="{{ path('profile_show', { 'id': profile.id }) }}">{{ profile.id }}</a></td>
-                <td>{% if profile.dateOfRegistration %}{{ profile.dateOfRegistration|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if profile.dateOfBirth %}{{ profile.dateOfBirth|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ profile.maritalStatus }}</td>
-                <td>{{ profile.gender }}</td>
-                <td>{{ profile.address }}</td>
-                <td>{{ profile.phone }}</td>
-                <td>{% if profile.isQualified %}Yes{% else %}No{% endif %}</td>
-                <td>{{ profile.state }}</td>
-                <td>{{ profile.annualIncome }}</td>
-                <td>{{ profile.netWorth }}</td>
-                <td>{{ profile.creditRating }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('profile_show', { 'id': profile.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('profile_edit', { 'id': profile.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('profile_new') }}">Create a new entry</a>
-        </li>
-    </ul>
+            </thead>
+            <tbody>
+            {% for profile in profiles %}
+                <tr>
+                    <td>{{ profile.firstName }} {{ profile.otherNames }} {{ profile.lastName }}</td>
+                    <td>{{ profile.annualIncome|number_format }}</td>
+                    <td>{{ profile.creditRating }}</td>
+                    <td>{{ profile.netWorth|number_format }}</td>
+                    <td>{% if profile.isQualified %}Yes{% else %}No{% endif %}</td>
+                    <td>{{ profile.phone }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('profile_show', { 'id': profile.id }) }}" class="btn btn-primary btn-sm">Show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('profile_edit', { 'id': profile.id }) }}" class="btn btn-warning btn-sm">Edit</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('profile_loan', { 'profileId': profile.id }) }}" class="btn btn-success btn-sm">View Loan History</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">
+            <p>
+                No members have registered.
+            </p>
+        </div>
+    {% endif %}
 {% endblock %}

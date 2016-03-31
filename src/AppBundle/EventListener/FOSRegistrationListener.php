@@ -15,6 +15,7 @@ use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class FOSRegistrationListener implements EventSubscriberInterface
 {
@@ -67,8 +68,11 @@ class FOSRegistrationListener implements EventSubscriberInterface
       $user->addRole('ROLE_USER');
     } else {
       $user->addRole('ROLE_ADMIN');
+      $user->getProfile()->setStatus('member');
     }
 
     $this->userManager->updateUser($user);
+
+    $event->setResponse(new RedirectResponse('\login'));
   }
 }

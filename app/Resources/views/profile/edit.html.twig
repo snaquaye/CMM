@@ -1,21 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'secure.html.twig' %}
 
-{% block body %}
-    <h1>Profile edit</h1>
+{% block pageTitle %}
+    Edit Profile <small>({{ profile.user.firstName }} {{ profile.user.otherNames }} {{ profile.user.lastName }})</small>
+{% endblock %}
 
+{% block content %}
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <div class="col-md-2 col-md-offset-2">
+            <input type="submit" value="Edit" class="btn btn-success" />
+        </div>
+        <div class="clearfix"></div>
     {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('profile_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

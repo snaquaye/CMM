@@ -129,6 +129,13 @@ class Profile
   private $payments;
 
   /**
+   * @var bool
+   *
+   * @ORM\Column(name="status", type="string", nullable=true)
+   */
+  private $status;
+
+  /**
    *
    */
   public function __construct()
@@ -481,27 +488,43 @@ class Profile
     return $this->loans;
   }
 
-    /**
-     * Add loan
-     *
-     * @param \AppBundle\Entity\Loan $loan
-     *
-     * @return Profile
-     */
-    public function addLoan(\AppBundle\Entity\Loan $loan)
-    {
-        $this->loans[] = $loan;
+  /**
+   * Add loan
+   *
+   * @param \AppBundle\Entity\Loan $loan
+   *
+   * @return Profile
+   */
+  public function addLoan(\AppBundle\Entity\Loan $loan)
+  {
+    $this->loans[] = $loan;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    /**
-     * Remove loan
-     *
-     * @param \AppBundle\Entity\Loan $loan
-     */
-    public function removeLoan(\AppBundle\Entity\Loan $loan)
-    {
-        $this->loans->removeElement($loan);
-    }
+  /**
+   * Remove loan
+   *
+   * @param \AppBundle\Entity\Loan $loan
+   */
+  public function removeLoan(\AppBundle\Entity\Loan $loan)
+  {
+    $this->loans->removeElement($loan);
+  }
+
+  /**
+   * @param $status bool
+   */
+  public function setStatus($status)
+  {
+    $this->status = $status;
+  }
+
+  /**
+   * @return bool
+   */
+  public function getStatus()
+  {
+    return $this->status;
+  }
 }

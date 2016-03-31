@@ -1,24 +1,35 @@
-{% extends 'base.html.twig' %}
+{% extends 'secure.html.twig' %}
 
-{% block body %}
-    <h1>Profile</h1>
+{% block pageTitle %}
+    {{ profile.user.firstName }} {{ profile.user.otherNames }} {{ profile.user.lastName }}
+{% endblock %}
 
-    <table>
+{% block content %}
+    <div class="margin-bottom pull-right">
+        <ul class="buttons">
+            <li>
+                <a href="{{ path('profile_edit', { 'id': profile.id }) }}" class="btn btn-sm btn-warning">Edit</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                <input type="submit" value="Delete" class="btn btn-sm btn-danger">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
+
+    <table class="table table-striped">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ profile.id }}</td>
+                <th>Date of registration</th>
+                <td>{% if profile.dateOfRegistration %}{{ profile.dateOfRegistration|date('d-M-Y') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Dateofregistration</th>
-                <td>{% if profile.dateOfRegistration %}{{ profile.dateOfRegistration|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <th>Date of birth</th>
+                <td>{% if profile.dateOfBirth %}{{ profile.dateOfBirth|date('d-M-Y') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Dateofbirth</th>
-                <td>{% if profile.dateOfBirth %}{{ profile.dateOfBirth|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Maritalstatus</th>
+                <th>Marital status</th>
                 <td>{{ profile.maritalStatus }}</td>
             </tr>
             <tr>
@@ -34,7 +45,7 @@
                 <td>{{ profile.phone }}</td>
             </tr>
             <tr>
-                <th>Isqualified</th>
+                <th>Is qualified</th>
                 <td>{% if profile.isQualified %}Yes{% else %}No{% endif %}</td>
             </tr>
             <tr>
@@ -42,31 +53,21 @@
                 <td>{{ profile.state }}</td>
             </tr>
             <tr>
-                <th>Annualincome</th>
-                <td>{{ profile.annualIncome }}</td>
+                <th>Annual income</th>
+                <td>{{ profile.annualIncome|number_format }}</td>
             </tr>
             <tr>
-                <th>Networth</th>
-                <td>{{ profile.netWorth }}</td>
+                <th>Net worth</th>
+                <td>{{ profile.netWorth|number_format }}</td>
             </tr>
             <tr>
-                <th>Creditrating</th>
+                <th>Credit rating</th>
                 <td>{{ profile.creditRating }}</td>
+            </tr>
+            <tr>
+                <th>Membership Status</th>
+                <td>{{ profile.status }}</td>
             </tr>
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('profile_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('profile_edit', { 'id': profile.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

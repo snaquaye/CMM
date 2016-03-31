@@ -1,47 +1,64 @@
-{% extends 'base.html.twig' %}
+{% extends 'secure.html.twig' %}
 
-{% block body %}
-    <h1>MemberLoan list</h1>
+{% block pageTitle %}
+    Loan History
+{% endblock %}
 
-    <table>
+{% block content %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-8 margin-bottom">
+            <a href="{{ path('memberloan_new') }}" class="btn btn-success pull-right">Apply for loan</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-stripped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Member</th>
-                <th>Dateissued</th>
-                <th>Amount</th>
-                <th>Interestrate</th>
-                <th>Issuedby</th>
+                <th>Name</th>
+                <th>Date Issued</th>
+                <th>Amount (NGN)</th>
+                <th>Interest Rate (%)</th>
+                <th>Amount Expected to be Paid</th>
+                <th>Approval Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for memberLoan in memberLoans %}
             <tr>
-                <td><a href="{{ path('memberloan_show', { 'id': memberLoan.id }) }}">{{ memberLoan.id }}</a></td>
-                <td>{{ memberLoan.member }}</td>
-                <td>{% if memberLoan.dateIssued %}{{ memberLoan.dateIssued|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ memberLoan.amount }}</td>
+                {% if memberLoan.profile is defined  %}
+                    <td>{{ memberLoan.profile.user.firstName }} {{ memberLoan.profile.user.otherNames }} {{ memberLoan.profile.user.lastName }}</td>
+                {% else %}
+                    <td>{{ memberLoan.firstName }} {{ memberLoan.otherNames }} {{ memberLoan.lastName }}</td>
+                {% endif %}
+                <td>{% if memberLoan.dateIssued %}{{ memberLoan.dateIssued|date('Y-m-d') }} {% else %} Loan not issued{% endif %}</td>
+                <td>{{ memberLoan.amount|number_format }}</td>
                 <td>{{ memberLoan.interestRate }}</td>
-                <td>{{ memberLoan.issuedBy }}</td>
+                <td>{{ ((memberLoan.amount * memberLoan.interestRate/100 * memberLoan.duration) + memberLoan.amount)|number_format }}</td>
+                <td>
+                    {% if memberLoan.approvalStatus is null %}
+                        Pending Loan Application
+                    {% else %}
+                        {{ memberLoan.approvalStatus }}
+                    {% endif %}
+                </td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('memberloan_show', { 'id': memberLoan.id }) }}">show</a>
+                            <a href="{{ path('memberloan_show', { 'id': memberLoan.id }) }}" class="btn btn-primary btn-sm">Show</a>
                         </li>
                         <li>
-                            <a href="{{ path('memberloan_edit', { 'id': memberLoan.id }) }}">edit</a>
+                            <a href="{{ path('memberloan_edit', { 'id': memberLoan.id }) }}" class="btn btn-warning btn-sm">Edit</a>
                         </li>
+                        {% if memberLoan.approvalStatus == 'Approved' %}
+                            <li>
+                                <a href="{{ path('payment_index', { 'loanId': memberLoan.id }) }}" class="btn btn-info btn-sm">View Payments</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('memberloan_new') }}">Create a new entry</a>
-        </li>
-    </ul>
 {% endblock %}

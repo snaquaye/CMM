@@ -1,44 +1,41 @@
-{% extends 'base.html.twig' %}
+{% extends 'secure.html.twig' %}
 
-{% block body %}
-    <h1>Payment</h1>
+{% block pageTitle %}
+    Payment Detail
+{% endblock %}
 
-    <table>
+{% block content %}
+    <div class="margin-bottom pull-right">
+        <ul class="buttons">
+            <li>
+                <a href="{{ path('payment_edit', { 'id': payment.id, 'loanId': app.request.get('loanId') }) }}" class="btn btn-warning btn-sm">Edit</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                    <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
+
+    <table class="table table-striped">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ payment.id }}</td>
+                <th>Member name</th>
+                <td>{{ payment.profile.user.firstName }} {{ payment.profile.user.otherNames }} {{ payment.profile.user.lastName }}</td>
             </tr>
             <tr>
-                <th>Member</th>
-                <td>{{ payment.member }}</td>
-            </tr>
-            <tr>
-                <th>Dateofpayment</th>
+                <th>Date of payment</th>
                 <td>{% if payment.dateOfPayment %}{{ payment.dateOfPayment|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Paymentmonth</th>
+                <th>Payment for</th>
                 <td>{{ payment.paymentMonth }}</td>
             </tr>
             <tr>
-                <th>Amountpaid</th>
+                <th>Amount paid</th>
                 <td>{{ payment.amountPaid }}</td>
             </tr>
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('payment_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('payment_edit', { 'id': payment.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

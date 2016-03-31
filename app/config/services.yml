@@ -21,7 +21,7 @@ services:
 
   app.form.profile:
     class: AppBundle\Form\ProfileType
-    arguments: ['@security.authorization_checker']
+    arguments: ['@security.authorization_checker', '@doctrine.orm.entity_manager']
     tags:
       - { name: form.type }
 
@@ -30,3 +30,9 @@ services:
     arguments: ['@doctrine.orm.entity_manager', '@fos_user.user_manager']
     tags:
       - { name: kernel.event_subscriber }
+
+  profile.form:
+    class: AppBundle\Form\MemberLoanType
+    arguments: ['@security.authorization_checker', '@doctrine.orm.entity_manager']
+    tags:
+        - { name: form.type, alias: loan_form }

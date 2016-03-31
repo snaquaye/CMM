@@ -1,3 +1,17 @@
 .login-panel {
     margin: 10% auto auto auto;
 }
+
+table ul li, .buttons li {
+    list-style: none;
+    display: inline-block;
+}
+
+table ul, .buttons {
+    padding: 0;
+    margin: 0;
+}
+
+.margin-bottom {
+    margin-bottom: 10px;
+}

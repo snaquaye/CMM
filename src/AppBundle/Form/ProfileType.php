@@ -70,6 +70,10 @@ class ProfileType extends AbstractType
 
         if (!$this->security->isGranted('ROLE_ADMIN')) {
           $form->remove('isQualified')->remove('creditRating');
+          $form->add('status', ChoiceType::class, [
+            'choices' => ['Approved' => 'Approved', 'Pending Approval' => 'Pending Approval', 'Disapproved' => 'Disapproved'],
+            'placeholder' => ''
+          ]);
         }
       })
       ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
