@@ -59,7 +59,10 @@ class ProfileType extends AbstractType
       ->add('state')
       ->add('annualIncome')
       ->add('netWorth')
-      ->add('creditRating')
+      ->add('creditRating', ChoiceType::class, [
+        'choices' => ['A' => 'A', 'B' => 'B', 'C' => 'C', 'D' => 'D'],
+        'placeholder' => ''
+      ])
       ->add('department', EntityType::class, [
         'class' => 'AppBundle\Entity\Department',
         'choice_label' => 'departmentName',
@@ -68,12 +71,18 @@ class ProfileType extends AbstractType
       ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
         $form = $event->getForm();
 
-        if (!$this->security->isGranted('ROLE_ADMIN')) {
-          $form->remove('isQualified')->remove('creditRating');
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+          $form->remove('isQualified');
+          $form->remove('creditRating');
           $form->add('status', ChoiceType::class, [
             'choices' => ['Approved' => 'Approved', 'Pending Approval' => 'Pending Approval', 'Disapproved' => 'Disapproved'],
             'placeholder' => ''
           ]);
+        }
+
+        if (!$this->security->isGranted('ROLE_ADMIN')) {
+          $form->remove('isQualified');
+          $form->remove('creditRating');
         }
       })
       ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
